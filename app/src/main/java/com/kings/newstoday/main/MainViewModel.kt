@@ -17,29 +17,32 @@ class MainViewModel @ViewModelInject constructor(
     private val dispatchers: DispatcherProvider
 ) : ViewModel() {
 
-    sealed class ArticleRetrievalEvent {
-        class Success(val resultText: Model): ArticleRetrievalEvent()
-        class Failure(val errorText: String): ArticleRetrievalEvent()
-        object Loading : ArticleRetrievalEvent()
-        object Empty : ArticleRetrievalEvent()
-    }
+//    sealed class ArticleRetrievalEvent {
+//        class Success(val resultText: Model): ArticleRetrievalEvent()
+//        class Failure(val errorText: String): ArticleRetrievalEvent()
+//        object Loading : ArticleRetrievalEvent()
+//        object Empty : ArticleRetrievalEvent()
+//    }
 
-    private val _articleList = MutableLiveData<ArticleRetrievalEvent>(ArticleRetrievalEvent.Empty)
-    val articleList: LiveData<ArticleRetrievalEvent> = _articleList
+    private val _articleList = MutableLiveData<Model>()
+    val articleList: LiveData<Model> = _articleList
 
 
     fun getArticlesList() {
 
         viewModelScope.launch (dispatchers.io) {
-            _articleList.value = ArticleRetrievalEvent.Loading
 
             when (val articleResponse = repository.getArticles()) {
-                is Resource.Error -> _articleList.value = ArticleRetrievalEvent.Failure(articleResponse.message!!)
+                is Resource.Error -> {
+//                    _articleList.value = articleResponse.message
+                    Log.i("Error viewmodel", articleResponse.message!!)
+
+                }
 
                 is Resource.Success -> {
-                    _articleList.value = ArticleRetrievalEvent.Success(articleResponse.data!!)
-                    Log.i("copyright ", (_articleList.value as ArticleRetrievalEvent.Success).resultText.copyright)
-                    Log.i("staus ", (_articleList.value as ArticleRetrievalEvent.Success).resultText.status)
+                    _articleList.value = articleResponse.data!!
+                    Log.i("copyright ", articleResponse.data.copyright)
+                    Log.i("status ", articleResponse.data.status)
                 }
             }
         }

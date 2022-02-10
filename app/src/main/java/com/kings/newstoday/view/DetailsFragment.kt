@@ -8,8 +8,9 @@ import android.view.ViewGroup
 import com.kings.newstoday.R
 import com.kings.newstoday.databinding.FragmentArticleBinding
 import com.kings.newstoday.databinding.FragmentDetailsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class DetailsFragment : Fragment() {
 
     private var _binding: FragmentDetailsBinding? = null

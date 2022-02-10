@@ -1,8 +1,11 @@
 package com.kings.newstoday.di
 
+import android.content.Context
 import com.kings.newstoday.data.ArticleApi
+import com.kings.newstoday.data.models.Model
 import com.kings.newstoday.main.DefaultMainRepository
 import com.kings.newstoday.main.MainRepository
+import com.kings.newstoday.utils.ArticleAdapter
 import com.kings.newstoday.utils.Constants
 import dagger.Module
 import dagger.Provides
@@ -28,4 +31,7 @@ class AppModule {
     @Singleton
     @Provides
     fun provideMainRepository(api: ArticleApi): MainRepository = DefaultMainRepository(api)
+
+    @Provides
+    fun provideArticleAdapter(context: Context, article: Model)  =  ArticleAdapter(context, article)
 }

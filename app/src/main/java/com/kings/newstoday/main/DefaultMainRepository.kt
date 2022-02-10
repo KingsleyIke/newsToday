@@ -2,6 +2,7 @@ package com.kings.newstoday.main
 
 import com.kings.newstoday.data.ArticleApi
 import com.kings.newstoday.data.models.Model
+import com.kings.newstoday.utils.Constants
 import com.kings.newstoday.utils.Resource
 import javax.inject.Inject
 
@@ -11,7 +12,7 @@ class DefaultMainRepository @Inject constructor(
     override suspend fun getArticles(): Resource<Model> {
 
         return try {
-            val response = api.getArticles()
+            val response = api.getArticles(Constants.API_KEY)
             val result = response.body()
             if(response.isSuccessful && result != null) {
                 Resource.Success(result)
@@ -19,7 +20,7 @@ class DefaultMainRepository @Inject constructor(
                 Resource.Error(response.message())
             }
         } catch(e: Exception) {
-            Resource.Error(e.message ?: "An error occured")
+            Resource.Error(e.message ?: "An error occurred")
         }
     }
 
