@@ -1,3 +1,5 @@
+package com.kings.newstoday.data.models
+
 data class Result(
     val `abstract`: String,
     val adx_keywords: String,
