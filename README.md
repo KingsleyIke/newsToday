@@ -14,8 +14,13 @@ Libraries Used
 
 
 App Structure
--MVVM
+- MVVM
+
+Tests Covered
+- Unit Test
 
 The app can run on Android Studio or apk built it and run on any adnroid device
+
+
 
 
