@@ -54,7 +54,6 @@ class ArticleAdapter () : RecyclerView.Adapter<ArticleAdapter.MyViewHolder>() {
             tv_title.text = article.title
             tv_brief.text = article.abstract
 
-
             container.setOnClickListener {
                 if (onClickListener != null) {
                     onClickListener!!.onClick(position, article)
