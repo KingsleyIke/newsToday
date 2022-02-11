@@ -18,6 +18,8 @@ import javax.inject.Inject
 
 class ArticleAdapter () : RecyclerView.Adapter<ArticleAdapter.MyViewHolder>() {
 
+    private var onClickListener: OnClickListener? = null
+
     private val differCallback = object : DiffUtil.ItemCallback<Result>() {
         override fun areItemsTheSame(oldItem: Result, newItem: Result): Boolean {
             return oldItem.url == newItem.url
@@ -42,36 +44,38 @@ class ArticleAdapter () : RecyclerView.Adapter<ArticleAdapter.MyViewHolder>() {
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val article = differ.currentList[position]
-//        val article = resultList[position]
-        Log.e("Adapeter", "Bind view" )
 
         holder.itemView.apply {
             try {
                 Glide.with(this).load(article.media[0].media_metadata[0].url).centerCrop().into(iv_article_image)
-
             } catch (e: Exception) {
                 e.printStackTrace()
             }
             tv_title.text = article.title
             tv_brief.text = article.abstract
-            Log.e("Adapeter", article.abstract )
+
+
+            container.setOnClickListener {
+                if (onClickListener != null) {
+                    onClickListener!!.onClick(position, article)
+                }
+            }
 
         }
 
-            Log.e("Adapeter", article.title)
-            Log.e("Adapeter", article.abstract)
     }
 
     override fun getItemCount(): Int {
+        
         return differ.currentList.size
-//        return resultList.size
     }
 
-    fun setOnItemClickListener(listener: (Result) -> Unit) {
-        onItemClickListener = listener
+    fun setOnClickListener(onClickListener: OnClickListener) {
+        this.onClickListener = onClickListener
     }
 
-    fun updateAdapeter () {
-        notifyDataSetChanged()
+    interface OnClickListener {
+
+        fun onClick(position: Int, result: Result)
     }
 }

@@ -36,8 +36,6 @@ class AppModule {
     @Provides
     fun provideMainRepository(api: ArticleApi): MainRepository = DefaultMainRepository(api)
 
-//    @Provides
-//    fun provideArticleAdapter(context: Context, article: Model)  =  ArticleAdapter(context, article)
 
     @Singleton
     @Provides

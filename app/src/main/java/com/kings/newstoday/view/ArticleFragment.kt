@@ -58,18 +58,27 @@ class ArticleFragment : Fragment() {
                     showProgressBar()
                 }
             }
+
+            articleAdapter.setOnClickListener(object :
+            ArticleAdapter.OnClickListener {
+                override fun onClick(position: Int, result: Result) {
+
+                    val bundle = Bundle().apply {
+                        putSerializable("article", result)
+                    }
+                    findNavController().navigate(
+                        R.id.action_articleFragment_to_detailsFragment,
+                        bundle
+                    )
+
+                }
+
+            }
+            )
         })
         Log.d("List view", "let's test")
 
-        articleAdapter.setOnItemClickListener {
-            val bundle = Bundle().apply {
-                putSerializable("article", it)
-            }
-            findNavController().navigate(
-                R.id.action_articleFragment_to_detailsFragment,
-                bundle
-            )
-        }
+
         return view
     }
 
@@ -88,11 +97,9 @@ class ArticleFragment : Fragment() {
         binding.recyclerView.apply {
             adapter = articleAdapter
             layoutManager = LinearLayoutManager(activity?.applicationContext)
-//            addOnScrollListener(this@ArticleFragment.scrollListener)
         }
     }
 
-    var isError = false
     var isLoading = false
 
     override fun onDestroyView() {

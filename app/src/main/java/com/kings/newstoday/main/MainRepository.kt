@@ -6,6 +6,6 @@ import retrofit2.Response
 
 interface MainRepository {
 
-    suspend fun getArticles(): Response<Model>
+    suspend fun getArticles(): Resource<Model>
 
 }
