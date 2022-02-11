@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.kings.newstoday.R
 import com.kings.newstoday.data.models.Result
 import kotlinx.android.synthetic.main.articles_card_view.view.*
+import java.io.Serializable
 import java.lang.Exception
 
 class ArticleAdapter () : RecyclerView.Adapter<ArticleAdapter.MyViewHolder>() {

@@ -11,13 +11,13 @@ class TestRepository : MainRepository {
 
     private var shouldRetrunNetworkError = false
 
-    val result1 = Result("","",2,"", "",listOf(""),2,listOf(""),2,
+    val result1 = Result("Sample Text","Sample Text",2,"Sample Text", "Sample Text",listOf(""),2,listOf(""),2,
         listOf(),"", listOf(""),listOf(""),"",
-        "","","2","", "","","","")
+        "Sample Text","Sample Text","2","Sample Text", "Sample Text","Sample Text","Sample Text","Sample Text")
 
-    val result2 = Result("","",2,"", "",listOf(""),2,listOf(""),2,
-    listOf(),"", listOf(""),listOf(""),"",
-    "","","2","", "","","","")
+    val result2 = Result("Sample Text","Sample Text",2,"Sample Text", "Sample Text",listOf(""),2,listOf(""),2,
+        listOf(),"", listOf(""),listOf(""),"",
+        "Sample Text","Sample Text","2","Sample Text", "Sample Text","Sample Text","Sample Text","Sample Text")
 
     val articleList = mutableListOf<Result>()
 
