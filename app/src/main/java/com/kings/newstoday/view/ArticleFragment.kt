@@ -43,7 +43,6 @@ class ArticleFragment : Fragment() {
                     hideProgressBar()
                     response.data?.let { articleResponse ->
 
-                        Toast.makeText(activity, "An error occured ${articleResponse.results[0].abstract}", Toast.LENGTH_LONG).show()
                         articleAdapter.differ.submitList(articleResponse.results)
                         articleAdapter.notifyDataSetChanged()
                     }
@@ -70,9 +69,7 @@ class ArticleFragment : Fragment() {
                         R.id.action_articleFragment_to_detailsFragment,
                         bundle
                     )
-
                 }
-
             }
             )
         })
@@ -92,7 +89,6 @@ class ArticleFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        Log.d("Set up recycler view", "let's test")
         articleAdapter = ArticleAdapter()
         binding.recyclerView.apply {
             adapter = articleAdapter
