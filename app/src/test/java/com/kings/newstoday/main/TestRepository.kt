@@ -1,4 +1,10 @@
 package com.kings.newstoday.main
 
-class TestRepository {
+import com.kings.newstoday.data.models.Model
+import retrofit2.Response
+
+class TestRepository : MainRepository {
+
+    override suspend fun getArticles(): Response<Model> {
+    }
 }
