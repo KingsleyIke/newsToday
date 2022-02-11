@@ -7,15 +7,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kings.newstoday.data.models.Model
-import com.kings.newstoday.utils.DispatcherProvider
 import com.kings.newstoday.utils.Resource
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-
-class MainViewModel @ViewModelInject constructor(
+@HiltViewModel
+class MainViewModel @Inject constructor(
     private val repository: MainRepository,
-    private val dispatchers: DispatcherProvider
 ) : ViewModel() {
+
 
 //    sealed class ArticleRetrievalEvent {
 //        class Success(val resultText: Model): ArticleRetrievalEvent()
@@ -30,7 +30,7 @@ class MainViewModel @ViewModelInject constructor(
 
     fun getArticlesList() {
 
-        viewModelScope.launch (dispatchers.io) {
+        viewModelScope.launch {
 
             when (val articleResponse = repository.getArticles()) {
                 is Resource.Error -> {

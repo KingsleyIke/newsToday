@@ -12,7 +12,7 @@ import com.kings.newstoday.data.models.Model
 import kotlinx.android.synthetic.main.articles_card_view.view.*
 import javax.inject.Inject
 
-class ArticleAdapter @Inject constructor (private val context: Context, private var article: Model) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ArticleAdapter @Inject constructor (private val context: Context, private var article: MutableLiveData<Model>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -21,7 +21,8 @@ class ArticleAdapter @Inject constructor (private val context: Context, private 
 
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val article = article.results[position]
+//        val article = article.results[position]
+        val article = article.value!!.results[position]
 
         if (holder is MyViewHolder) {
 
@@ -33,7 +34,7 @@ class ArticleAdapter @Inject constructor (private val context: Context, private 
     }
 
     override fun getItemCount(): Int {
-        return article.results.size
+        return article.value!!.results.size
     }
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
