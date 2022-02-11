@@ -1,6 +1,5 @@
 package com.kings.newstoday.utils
 
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,11 +9,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.kings.newstoday.R
-import com.kings.newstoday.data.models.Model
 import com.kings.newstoday.data.models.Result
 import kotlinx.android.synthetic.main.articles_card_view.view.*
 import java.lang.Exception
-import javax.inject.Inject
 
 class ArticleAdapter () : RecyclerView.Adapter<ArticleAdapter.MyViewHolder>() {
 
