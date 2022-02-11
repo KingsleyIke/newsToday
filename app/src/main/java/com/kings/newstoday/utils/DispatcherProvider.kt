@@ -3,8 +3,8 @@ package com.kings.newstoday.utils
 import kotlinx.coroutines.CoroutineDispatcher
 
 interface DispatcherProvider {
-//    val main: CoroutineDispatcher
-//    val io: CoroutineDispatcher
-//    val default: CoroutineDispatcher
-//    val unconfined: CoroutineDispatcher
+    val main: CoroutineDispatcher
+    val io: CoroutineDispatcher
+    val default: CoroutineDispatcher
+    val unconfined: CoroutineDispatcher
 }

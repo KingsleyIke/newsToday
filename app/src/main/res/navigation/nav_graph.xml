@@ -18,5 +18,9 @@
         android:id="@+id/detailsFragment"
         android:name="com.kings.newstoday.view.DetailsFragment"
         android:label="fragment_details"
-        tools:layout="@layout/fragment_details" />
+        tools:layout="@layout/fragment_details">
+        <argument
+            android:name="article"
+            app:argType="com.kings.newstoday.data.models.Result" />
+    </fragment>
 </navigation>

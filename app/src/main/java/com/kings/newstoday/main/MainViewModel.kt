@@ -1,50 +1,80 @@
 package com.kings.newstoday.main
 
 import android.util.Log
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kings.newstoday.data.models.Model
 import com.kings.newstoday.utils.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Response
+import java.io.IOException
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val repository: MainRepository,
+    private val repository: DefaultMainRepository,
 ) : ViewModel() {
 
+    var articleResponse: Model? = null
 
-//    sealed class ArticleRetrievalEvent {
-//        class Success(val resultText: Model): ArticleRetrievalEvent()
-//        class Failure(val errorText: String): ArticleRetrievalEvent()
-//        object Loading : ArticleRetrievalEvent()
-//        object Empty : ArticleRetrievalEvent()
-//    }
+    init {
+        getArticlesList()
+    }
 
-    private val _articleList = MutableLiveData<Model>()
-    val articleList: LiveData<Model> = _articleList
+    private val _articleList: MutableLiveData<Resource<Model>> = MutableLiveData()
+    val articleList: MutableLiveData<Resource<Model>> = _articleList
 
 
     fun getArticlesList() {
 
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
 
-            when (val articleResponse = repository.getArticles()) {
-                is Resource.Error -> {
-//                    _articleList.value = articleResponse.message
-                    Log.i("Error viewmodel", articleResponse.message!!)
+//            when (val articleResponse = repository.getArticles()) {
+//                is Resource.Error -> {
+////                    _articleList.value = articleResponse.message
+//                    Log.e("Error viewmodel", articleResponse.message!!)
+//
+//                }
+//
+//                is Resource.Success -> {
+//                    _articleList.postValue(articleResponse.data!!)
+//                    Log.i("copyright ", articleResponse.data.copyright)
+//                    Log.i("status ", articleResponse.data.status)
+//                }
+//            }
+            try {
 
-                }
+            val response = repository.getArticles()
 
-                is Resource.Success -> {
-                    _articleList.value = articleResponse.data!!
-                    Log.i("copyright ", articleResponse.data.copyright)
-                    Log.i("status ", articleResponse.data.status)
+            _articleList.postValue(Resource.Loading())
+            _articleList.postValue(handleArticleResponse(response))
+
+            } catch (t: Throwable) {
+                when(t) {
+                    is IOException -> _articleList.postValue(Resource.Error("Network Failure"))
+                    else -> _articleList.postValue(Resource.Error("Conversion Error"))
                 }
             }
+//            val response = repository.getArticles()
+//
+//            _articleList.postValue(Resource.Loading())
+//            _articleList.postValue(handleArticleResponse(response))
         }
+    }
+
+    private fun handleArticleResponse(response: Response<Model>) : Resource<Model> {
+        if(response.isSuccessful) {
+            response.body()?.let { resultResponse ->
+
+                    articleResponse = resultResponse
+
+                return Resource.Success(articleResponse ?: resultResponse)
+            }
+        }
+        return Resource.Error(response.message())
     }
 }

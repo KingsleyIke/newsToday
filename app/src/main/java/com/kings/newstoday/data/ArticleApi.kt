@@ -8,10 +8,8 @@ import retrofit2.http.Query
 
 interface ArticleApi {
 
-    @GET("/viewed/${Constants.PERIOD}.json")
-    suspend fun getArticles(
-        @Query(Constants.API_KEY) api_key: String?
-    ):Response<Model>
+    @GET("/svc/mostpopular/v2//viewed/7.json?api-key=A0XSjiAU6s8JQhaaK7GIUdHrD87Yiqka")
+    suspend fun getArticles():Response<Model>
 
 
 }

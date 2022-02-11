@@ -1,7 +1,9 @@
 package com.kings.newstoday.data.models
 
+import java.io.Serializable
+
 data class Result(
-    val `abstract`: String,
+    val abstract: String,
     val adx_keywords: String,
     val asset_id: Long,
     val byline: String,
@@ -23,4 +25,4 @@ data class Result(
     val updated: String,
     val uri: String,
     val url: String
-)
+) : Serializable

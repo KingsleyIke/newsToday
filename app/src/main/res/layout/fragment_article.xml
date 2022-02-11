@@ -7,11 +7,20 @@
     tools:context=".view.ArticleFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/tv_no_articles"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/no_articles_to_display" />
+<!--    <TextView-->
+<!--        android:id="@+id/tv_no_articles"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:text="@string/no_articles_to_display" />-->
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_View"
