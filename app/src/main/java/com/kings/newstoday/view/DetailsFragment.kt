@@ -25,7 +25,6 @@ class DetailsFragment : Fragment() {
 
     val args: DetailsFragmentArgs  by navArgs()
 
-    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
