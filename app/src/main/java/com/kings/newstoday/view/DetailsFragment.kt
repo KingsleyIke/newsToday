@@ -41,10 +41,10 @@ class DetailsFragment : Fragment() {
 
         }
 
-        webview.apply {
-            webViewClient = WebViewClient()
-            loadUrl(args.article.url)
-        }
+//        webview.apply {
+//            webViewClient = WebViewClient()
+//            loadUrl(args.article.url)
+//        }
 
 
             return view
